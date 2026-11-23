@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>wakeem.dev — Portfolio</title>
+
+
+<!-- links for font for header-->
+
+<style>
+/* ===========================
+   GLOBAL RESET + BODY
+   =========================== */
+
+body {
+    margin: 0;
+    background: #05060b;
+    color: #e5f4ff;
+    font-family: Consolas, "Fira Code", monospace;
+}
+
+.glow {
+    text-shadow: 0 0 12px rgba(0,255,200,0.6);
+}
+
+
+
+
+
+
+
+/* ===========================
+   HEADERS + NAVIGATION/SEARCHVAR
+   =========================== */
+
+sticky_header {
+    color:#05060b; 
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between; 
+    background:#090c19; 
+    padding:15px;
+    position:sticky;
+    top: 10px; /* makes it stick to the top of the viewport */
+    z-index:100; /* ensures it stays above other content when scrolling */
+    border-radius: 20px;
+    margin-bottom: 20px;
+    width: 110%;
+    margin-left: -5%;
+    box-shadow: 0 0 10px rgba(0,255,200,0.18);
+    border: 1px solid rgba(0,255,200,0.18);
+}
+
+/* Container must be relative so the dropdown can anchor directly below it */
+.search-container {
+  position: relative;
+  width: 300px;
+}
+
+/* Absolute layout forces the dropdown to float over other page elements */
+#suggestionBox {
+  position: absolute;
+  top: 100%; /* Positions the box directly beneath the input field */
+  left: 0;
+  width: 100%; /* Matches the exact width of the search container */
+  background: #090c19; /* Prevents underlying page content from bleeding through */
+  border: 1px solid #05060b;
+  list-style: none; /* Removes default bullet points from the list */
+  padding: 0;
+  margin: 0;
+  z-index: 10; /* Ensures the dropdown stays on top of surrounding elements */
+  color: #e5f4ff;
+}
+
+/* Individual suggestion items styling */
+#suggestionBox li {
+  padding: 10px;
+  cursor: pointer; /* Changes mouse cursor to a hand icon to show clickability */
+}
+
+/* Visual feedback when users move their mouse over an option */
+#suggestionBox li:hover {
+  box-shadow: 0 0 10px rgba(0,255,200,0.18);
+    border: 1px solid rgba(0,255,200,0.18);
+}
+
+/* Utility class used to toggle visibility via JavaScript */
+.hidden {
+  display: none;
+}
+
+
+/* Toggle checkbox styling */
+#closeOthersToggle {
+    width: 18px;
+    height: 18px;
+    accent-color: #6af7d4; /* neon aqua */
+    cursor: pointer;
+    transform: scale(1.2);
+}
+#closeOthersLabel {
+    color: #9fb3ff;
+    font-size: 14px;
+    margin-left: 6px;
+    cursor: pointer;
+}
+
+
+
+
+
+header {
+    padding: 40px;
+    border-bottom: 1px solid #1b2338;
+    background: radial-gradient(circle at top left, #10182a 0, #05060b 60%, #020308 100%);
+    box-shadow: 0 0 25px rgba(0,255,200,0.18);
+}
+
+nav a {
+    color: #e5f4ff;
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid #28345a;
+    border-radius: 999px;
+    margin-right: 8px;
+    background: linear-gradient(135deg, rgba(0,255,200,0.08), rgba(0,140,255,0.08));
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+nav a:hover {
+    background: rgba(0,255,200,0.18);
+    border-color: #6af7d4;
+}
+
+h3{
+    font-family: "PlayFair Display", serif;
+    font-size: 24px;
+    color: #ffdd7a;
+    font-weight: 1;
+    margin-bottom: -4px;
+    /*text-shadow: 0 0 5px #ffde7a40, 0 0 10px #ffde7a5d;*/
+    /*text-shadow: 0 0 18px rgba(255, 222, 122, 0.253);*/
+}
+
+ul{
+    margin-top: -6px;
+}
+
+
+
+
+
+
+
+/* ===========================
+   PANELS + TERMINAL
+   =========================== */
+
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.panel {
+    background: linear-gradient(145deg, #050814, #05060b);
+    border: 1px solid #1b2338;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 18px rgba(0,0,0,0.7);
+}
+
+.panel h2 {
+    margin-top: 0;
+    color: #ffffff;
+}
+
+.tag {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #7a8cff;
+    margin-bottom: 8px;
+}
+
+.terminal {
+    background: rgba(2,10,25,0.9);
+    border: 1px solid #18233c;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.terminal span {
+    color: #6af7d4;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: #5f6c9b;
+    border-top: 1px solid #141a2b;
+    margin-top: 40px;
+}
+
+
+
+
+
+
+
+/* ===========================
+   COLLAPSIBLE SECTIONS (BIG)
+   =========================== */
+
+.section-details {
+    border-radius: 14px;
+    border: 1px solid #1b2338;
+    background: linear-gradient(145deg, #050814, #05060b);
+    padding: 14px 16px 16px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 18px rgba(0,0,0,0.7);
+}
+
+.section-details[open] {
+    border-color: #6af7d4;
+    box-shadow: 0 0 22px rgba(0,255,200,0.35);
+}
+
+.section-details summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.summary-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.summary-title {
+    font-size: 22px;
+    color: #ffffff;
+}
+
+.summary-tag {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #7a8cff;
+}
+
+.summary-icon {
+    font-size: 18px;
+    color: #6af7d4;
+    transition: transform 0.2s;
+}
+
+.section-details[open] .summary-icon {
+    transform: rotate(90deg);
+}
+
+.collapsible-body {
+    opacity: 0;
+    margin-top: 14px;
+}
+
+
+
+
+
+
+
+/* ===========================
+   COLLAPSIBLE LOGS (SMALL)
+   =========================== */
+
+.achievement details {
+    border-radius: 10px;
+    border: 1px solid #28345a;
+    background: rgba(3,10,25,0.9);
+    padding: 10px 12px;
+    margin-bottom: 10px;
+    transition: 0.2s;
+}
+
+.achievement details[open] {
+    border-color: #6af7d4;
+    box-shadow: 0 0 12px rgba(0,255,200,0.15);
+}
+
+.achievement summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #e5f4ff;
+    font-size: 16px;
+}
+
+.achievement summary::-webkit-details-marker {
+    display: none;
+}
+
+.ach-icon {
+    font-size: 16px;
+    color: #6af7d4;
+    transition: transform 0.2s;
+}
+ 
+
+.about-body {
+    opacity: 0;
+    margin-top: 8px;
+    font-size: 20px;
+    font-family: "PlayFair Display", serif;
+    color: #ffffff;
+    line-height: 1.5;
+}
+
+.achievement-body {
+    opacity: 0;
+    margin-top: 8px;
+    font-family: "PlayFair Display", serif;
+    font-size: 20px;
+    color: #ffffff;
+    line-height: 1.5;
+}
+
+
+
+
+/* ===========================
+    SETTINGS BUTTON + PANEL 
+   =========================== */
+
+
+#settingsContainer {
+    position: relative;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+#settingsBtn {
+    background: #0b0f1c;
+    border: 1px solid #28345a;
+    color: #6af7d4;
+    font-size: 18px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#settingsBtn:hover {
+    background: rgba(0,255,200,0.15);
+    border-color: #6af7d4;
+}
+
+/* Hidden panel */
+#settingsPanel {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background: #050814;
+    border: 1px solid #28345a;
+    border-radius: 10px;
+    padding: 12px;
+    width: 200px;
+    box-shadow: 0 0 18px rgba(0,255,200,0.15);
+    display: none;
+    animation: fadeIn 0.25s ease-out;
+}
+
+.settingItem {
+    color: #9fb3ff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+/* Checkbox style */
+#settingsPanel input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #6af7d4;
+    cursor: pointer;
+}
+
+
+.settingsBtnAction {
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    background: #0b0f1c;
+    border: 1px solid #28345a;
+    color: #6af7d4;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: inherit;
+}
+
+.settingsBtnAction:hover {
+    background: rgba(0,255,200,0.15);
+    border-color: #6af7d4;
+}
+
+
+
+/* Fade animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+
+/* ===========================
+   ANIMATIONS + EFFECTS
+   =========================== */
+
+/* Typing effect */
+.typing {
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid #6af7d4;
+    animation: typing 1.5s steps(12) forwards, blink 0.7s infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 210px; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+/* Replayable collapsible animation */
+.animate-open {
+    animation: slideDown 0.75s ease-in-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1 !important;
+        transform: translateY(0);
+    }
+}
+
+details summary {
+    transition: color 0.2s ease;
+}
+
+details[open] > summary {
+    color: #6af7d4;
+}
+
+/*summary icon ani*/
+.summary-icon,
+.ach-icon {
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
+}
+
+details[open] > summary .summary-icon,
+details[open] > summary .ach-icon {
+    transform: rotate(90deg);
+    color: #6af7d4;
+}
+
+
+/* Neon pulse */
+.section-details[open],
+.achievement details[open] {
+    animation: neonPulse 0.6s ease-out;
+}
+
+@keyframes neonPulse {
+    0% { box-shadow: 0 0 0px rgba(0,255,200,0.0); }
+    50% { box-shadow: 0 0 22px rgba(0,255,200,0.35); }
+    100% { box-shadow: 0 0 14px rgba(0,255,200,0.25); }
+}
+
+/* Glitch hover */
+.summary-title:hover {
+    animation: glitch 0.4s steps(2, end);
+}
+
+@keyframes glitch {
+    0% { text-shadow: 2px 0 #6af7d4, -2px 0 #ffdd7a; }
+    20% { text-shadow: -2px 0 #6af7d4, 2px 0 #ffdd7a; }
+    40% { text-shadow: 2px 0 #ffdd7a, -2px 0 #6af7d4; }
+    60% { text-shadow: -2px 0 #ffdd7a, 2px 0 #6af7d4; }
+    100% { text-shadow: none; }
+}
+
+</style>
+</head>
+
+<body>
+
+<header id="header">
+    <h1 class="glow typing">&gt; wakeem<span style="color:#6af7d4;">.dev</span></h1>
+
+
+
+    <div style="color:#9fb3ff; font-size:13px;">
+        status: <span style="color:#6af7d4;">online</span> • mode: <span style="color:#ffdd7a;">learning & building</span>
+    </div>
+ 
+
+    <div class="terminal">
+        <div class="tag">terminal</div>
+        <span>$</span> who_am_i<br>
+        → aspiring developer | curious mind | always debugging and improving.<br><br>
+        <span>$</span> mission<br>
+        → I want to understand how things work, build cool stuff, and share what I learn along the way.<br><br>
+        <span>$</span> hidden_code<br>
+        → The code for my projects will be hidden. You may contact me if you wish to see it.<br><br>
+        <span  style="color:#ffdd7a;">$ secret</span><br>
+        → Like all of my projects, there is a secret somewhere in this website. Try to see if you can find it! (Hint: it has something to do with the search bar)<br><br>
+    </div>
+</header>
+
+<div class="container">
+
+
+<sticky_header>
+
+    
+
+    <!-- Wrapper container to align the input field and its absolute-positioned dropdown -->
+    <div class="search-container">
+    
+    <!-- Main text input field where the user types their search query -->
+    <div style="margin-top:0;">
+        <input id="searchBox" 
+               class="search-box header-search" 
+               type="text" 
+               placeholder="Search..." 
+               style="width: 260px; padding: 8px 12px; border-radius: 8px; border: 1px solid #28345a; background:#05060b; color:#e5f4ff; font-family:inherit;">
+    </div>
+    
+    <!-- Unordered list that acts as the container for dynamic suggestion items -->
+    <!-- Starts with the "hidden" class so it remains invisible until typing begins -->
+    <ul id="suggestionBox" class="hidden"></ul>
+    
+    </div>
+
+
+    <!-- SETTINGS BUTTON -->
+    <div id="settingsContainer">
+        <button id="settingsBtn">⚙️</button>
+
+        <div id="settingsPanel">
+
+            <label class="settingItem">
+                <input type="checkbox" id="closeOthersToggle" checked>
+                Close other sections after searching (autoclose)
+            </label>
+
+            <button class="settingsBtnAction" id="openAllBtn">Open all</button>
+            <button class="settingsBtnAction" id="closeAllBtn">Close all</button>
+
+        </div>
+
+    </div>
+
+
+
+    <nav>
+        <a href="#about">about</a>
+        <a href="#achievements">achievements</a>
+        <a href="#projects">projects</a>
+        <a href="#contact">contact</a>
+    </nav>
+</sticky_header>
+
+
+
+
+
+
+<!-- ABOUT -->
+<section id="about" class="panel">
+    <div class="tag">about_me.json</div>
+    <h2>About Me</h2>
+
+    <p>I’m <span style="color:#6af7d4;">wakeem</span>, someone who enjoys solving problems efficiently, experimenting, learning, and figuring out the operating principles of new technology.</p>
+
+    <p><span style="color:#ffdd7a;">Current focus:</span> improving my coding skills, learning new skills - like drawing and graphics design, and creating new projects that challenge me.</p>
+    
+    <div class="collapsible-about-body achievement">
+
+        <details data-keywords="about me">
+            <summary>
+                Read more about me.
+                <span class="ach-icon">&gt;</span>
+            </summary>
+
+            <div class="about-body" >
+                Ever since I was young, I was always a curious child and loved experimenting with new things. I took things apart to see how they worked. I fixed things. I played with things I probably shouldn't have.<br><br>
+
+                My fascination with technology stemmed from this curiosity. I used to always find stuff to take apart and play with. The first thing I remember being able to understand and put back together was this RC car. It was ~$10 and was around the size of a Hot Wheels car. I was bored and decided to take it apart. After doing so, I was somehow able to understand what goes where and how it works. Though I obviously only knew to an extent what the parts were. I was going based off of theories and not research.<br><br>
+
+                I put it back together, and it fully worked, to my surprise. After that, I took apart many things just to put them back together. I even started fixing broken things around the house. And even taking garbage and fixing it or scrapping it for parts. The main thing I used to fix was my Nintendo Switch.<br><br>
+
+                For years it would get broken. Whether it was due to age or from my little brother breaking it, it would get damaged a lot. After years of fixing it, I know it by heart. Another example would be my current laptop. I don’t even have the screws in the laptop case since I tinker with it so much. Mainly because of the fan, since it’s a bit defective, so I have to tinker with it every now and then.<br><br>
+
+                More recently, I have been getting into coding a lot. I got good at it almost immediately and went on to achieve a lot within a short time. My first achievement was getting my Pitt project for CHS programming into one line using list comprehension. This is an intermediate-level technique often taught in college, and I did it without any source material. I figured it out just by experimenting. Then, I managed to basically master it. Lastly, I implemented it into my code. And all in less than half an hour.<br><br>
+
+                A more recent achievement of mine would be the making of a Jarvis-like utility based AI. Though not complete, it still has some useful functionality. Like being able to turn off and on my lights and set reminders. Along with this, I also have been working on a conversation AI, named Sage, that I hope to make more advanced and implement more utility into in the near future.<br><br>
+
+                Something else about me is that I tend to use hi a lot in my code. Whether it be to test something, have as a random variable, or use as an easter egg, I use it a lot. 
+            </div>
+        </details>
+
+    </div>
+</section>
+
+
+
+
+
+
+<!-- -----------------------------------------------------------------------      FOR REFERENCE     ----------------------------------------------------------------------------- -->
+
+
+<!--
+
+THIS IS TO MAKE THE WHOLE OUTER SECTIONS (LIKE THE PROJECTS OR ACHIEVEMENTS) OTHER COLLAPSIBLES GO UNDER THE SUMMARY 
+
+<details class="section-details" id="achievements">       
+    <summary>
+        <div class="summary-left">
+            <div class="summary-tag">academic_achievements.log</div>
+            <div class="summary-title">Academic Achievements</div>
+        </div>
+        <div class="summary-icon">&gt;</div>
+    </summary>
+
+
+
+</details>
+
+-->
+
+<!---------------------------------------------------------------------->
+
+<!--
+    THIS IS TO MAKE ONE INNER COLLAPSIBLE FOR A SUBJECT LIKE CHS PROGRAMMING        STUFF GOES UNDER THE SUMMARY
+
+    <div class="collapsible-body achievement"> 
+        <details>
+            <summary>
+                NAME 
+                <span class="ach-icon">&gt;</span>
+            </summary>
+
+
+        </details>
+    </div>
+
+-->
+
+
+<!---------------------------------------------------------------------->
+
+<!--
+THIS IS TO MAKE THE COLLAPSIBLE FOR THE SUBJECT   INFORMATION GOES IN THE achievement-body DIV
+
+            <div class="achievement-body">
+
+                <details>
+                    <summary>
+                        NAME
+                        <span class="ach-icon">&gt;</span>
+                    </summary>
+
+                    <div class="achievement-body">
+                        BODY OR WHATEVER    
+                    </div>
+
+                </details>
+            </div>
+
+-->
+
+<!---------------------------------------------------------------------->
+
+<!--  This is what it would look like all together  ADD ARROWS BACK TO COMMENTS TO MAKE THEM COMMENTS AGAIN
+
+<!-- OUTER PART TO MAKE THE WHOLE SECTION COLLAPSIBLE --
+
+<details class="section-details" id="achievements">       
+    <summary>
+        <div class="summary-left">
+            <div class="summary-tag">academic_achievements.log</div>
+            <div class="summary-title">Academic Achievements</div>
+        </div>
+        <div class="summary-icon">&gt;</div>
+    </summary>
+
+
+    <!-- INNER PART FOR SUBJECT --
+
+    <div class="collapsible-body achievement"> 
+        <details>
+            <summary>
+                NAME 
+                <span class="ach-icon">&gt;</span>
+            </summary>
+
+
+            <!--INNER PART FOR INFORMATION BODY COLLAPSIBLE--
+
+            <div class="achievement-body">
+
+                <details>
+                    <summary>
+                        NAME
+                        <span class="ach-icon">&gt;</span>
+                    </summary>
+
+                    <div class="achievement-body">
+                        BODY OR WHATEVER    
+                    </div>
+
+                </details>
+            </div>
+
+        </details>
+    </div>
+
+
+
+</details>
+
+-->
+
+
+<!--  
+                    <h3>What:</h3>
+
+                    <br><br>
+
+
+                    <h3>Language/Tools Used:</h3>
+
+                    <br><br>
+
+                    <h3>Visual Demo:</h3>
+
+                    <a href="link_goes_here" target="_blank" style="color: #6af7d4;">(Video Link)</a>
+                    <br><br>
+
+
+                    <h3>What I Learned:</h3>
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    <br><br>
+
+                    <h3>Reflection</h3>  
+                    
+-->
+
+
+
+
+
+<!-- ACADEMIC ACHIEVEMENTS -->
+<details class="section-details" id="achievements" data-keywords="academic achievements">
+    <summary>
+        <div class="summary-left">
+            <div class="summary-tag">academic_achievements.log</div>
+            <div class="summary-title">Academic Achievements</div>
+        </div>
+        <div class="summary-icon">&gt;</div>
+    </summary>
+
+    
+
+    <div class="collapsible-body achievement">
+
+        <details data-keywords="coding achievements">
+            <summary>
+                Coding related achievements
+                <span class="ach-icon">&gt;</span>
+            </summary>
+
+
+
+
+
+            <div class="achievement-body">
+                <details data-keywords="chs programming">
+                    <summary>
+                        CHS Programming
+                        <span class="ach-icon">&gt;</span>
+                    </summary>
+
+                    <div class="achievement-body">
+
+
+                        <!-- INNER COLLAPSIBLE FOR CHS PROGRAMMING-->
+
+
+
+                            <!-- PITTS PROJECTS -->
+
+                            <details data-keywords="pitt project 1">
+                                <summary>
+                                    Monty Hall Simulation (Pitt Project 1)
+                                    <span class="ach-icon">&gt;</span>
+                                </summary>
+
+                                <div class="achievement-body">
+                                    <h3>What:</h3>
+                                    For this project, we had to make a program that would simulate the Monty Hall problem (see below for description). It would start with asking how many rounds the user wanted to simulate—between 10 and 10000. Then, it would ask the user if they wanted to switch or stay. Lastly, it would run the simulation and print out how many rounds the player won.
+                                    <br><br>
+                                    The Monty Hall problem is a probability puzzle based on a game show scenario. You are presented with three doors: behind one door is a car (the prize you want), and behind the other two doors are goats. You choose one door, but before it’s opened, the host (who knows what’s behind each door) opens another door, revealing a goat. You are then given the option to stick with your original choice or switch to the remaining unopened door. The counterintuitive solution is that switching doors actually gives you a 2/3 chance of winning the car, while sticking with your original choice only gives you a 1/3 chance.
+                                    <br><br>
+
+                                    <h3>Language/Tools Used:</h3>
+                                    Python, Random library, Coded in Replit
+                                    <br><br>
+
+                                    <h3>Visual Demo:</h3>
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/KaMJCgtzBOM?si=dC1Kt03ZL4f7LVf2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    <a href="https://youtu.be/KaMJCgtzBOM" target="_blank" style="color: #6af7d4;">(Video Link)</a>
+                                    <br><br>
+                                    
+                                    <h3>What I Learned:</h3>
+                                    <ul>
+                                        <li>How to use list comprehension in Python</li>
+                                        <li>The probability theory behind the Monty Hall problem</li>
+                                        <li>Basic concepts of probability and statistics</li>
+                                    </ul>
+                                    <br><br>
+
+                                    <h3>Reflection</h3>
+                                    This project taught me more about probabilities. After finishing the project, me and a friend–James McCarter–had a race to see who could optimize and shrink down the code the most. In the end, I won. Using list comprehension, which I had taught myself how to use with no material, I got the code from ~120 lines of code down to 1. 
+                                    <br><br>
+                                    Now, some of the code was unneeded, like print statements to show a door making a GUI. However, I still think of this as an achievement as I had only been programming for a few months and managed to learn list comprehension solely through experimenting, implemented it into my program, and finish optimizing the code, all within half an hour. Though, the code is not very readable as one line and I acknowledge that it isn't very practical. However, it was still a fun challenge and I learned a lot from it, so I consider it an achievement.
+
+                                </div>
+                            </details>
+
+
+                            <details data-keywords="pitt project 2">
+                                <summary>
+                                    Word Frequency Analysis (Pitt Project 2)
+                                    <span class="ach-icon">&gt;</span>
+                                </summary>
+
+                                <div class="achievement-body">
+                                    <h3>What:</h3>
+                                    For this project, we had to analyze the frequency of words in the Sherlock Holmes books. We had to read in the text files for the books, clean the data, and then count how many times each word appeared. We then had to print out the most common words, excluding words like "the", "and", and "of", along with their counts.
+                                    <br><br>
+
+
+                                    <h3>Language/Tools Used:</h3>
+                                    Python, coded in replit
+                                    <br><br>
+
+                                    <h3>Visual Demo:</h3>
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/ty4HeFtnVdo?si=R7D2vjN7zjDDHeyJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    <a href="https://youtu.be/ty4HeFtnVdo?si=zI27Ux-BblsDYOxl" target="_blank" style="color: #6af7d4;">(Video Link)</a>
+                                    <br><br>
+                                    
+                                    <h3>What I Learned:</h3>
+                                    <ul>
+                                        <li>How to use dictionaries in Python to count occurrences of items</li>
+                                        <li>How to clean and preprocess text data</li>
+                                        <li>How to use dictionary comprehension in Python</li>
+                                    </ul>
+                                    <br><br>
+
+                                    
+                                    <h3>Reflection</h3>
+                                    I liked this project as it was a good exercise in data cleaning and manipulation. I also expanded upon my knowledge of how to use dictionaries in Python by learning how to count occurrences of items. And like Pitt Project 1, I had decided to optimize and shrink the code down. This time, however, I started with optimizing instead of writing a bunch of code and then deciding to do it. While I did manage to get it down to 1 line of code, I also made a second version that was still small but more clean and easier to read. That version ended up being 13 lines of code. 
+                                    <br><br>
+                                    I also ended up coding this project at my local Dairy Queen where I work by using Replit on my phone to write the code while also making the code in my head. I would first make the code in my head, then run through it and try to find any errors, then put it into my phone. I would then run it to confirm it was good, then repeat the process until I was done. This was especially hard for this project due to the amount of loops and processing that I would have to do while still handling money/making and handing out orders at my job. I managed to pretty much complete all three parts within the 3 hours of my shift and did the last finishing touches at home.
+                                </div>
+                            </details>
+
+                            <details   data-keywords="pitt project 3">
+                                <summary>
+                                    Flashcard Quiz Interface (Pitt Project 3)
+                                    <span class="ach-icon">&gt;</span>
+                                </summary>
+
+                                <div class="achievement-body">
+                                    <h3>What:</h3>
+                                    For the 3rd Pitt Project, we had to create a flashcard-type study tool to practice the creation of classes and using inheritance while also using some basic exception handling. We had to make two classes to store short answer questions and true/false questions. The main method should read from text files to create the ShortAnswer and TrueFalse objects, which are then shuffled and presented to the user with real-time feedback.
+                                    <br><br>
+
+
+                                    <h3>Language/Tools Used:</h3>
+                                    Python, Random library, coded in Replit
+                                    <br><br>
+
+                                    <h3>Visual Demo:</h3>
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/JFDN8KANy58?si=cvubbbvqWJTg0Yqv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                    <a href="https://youtu.be/JFDN8KANy58" target="_blank" style="color: #6af7d4;">(Video Link)</a>
+                                    <br><br>
+
+
+                                    <h3>What I Learned:</h3>
+                                    <ul>
+                                        <li>Creating and using classes in Python</li>
+                                        <li>Implementing inheritance to avoid code duplication</li>
+                                        <li>Basic exception handling</li>
+                                    </ul>
+                                    <br><br>
+
+                                    <h3>Reflection</h3>
+                                    This project was a good practice for applying object-oriented programming concepts in a practical scenario. Like the other Pitt projects, it wasn't too hard to do, and I enjoyed it. And like Pitt Project 2, I did this project on my phone at work. I also got it down to one line, but at this point, it was more of a gimmick/challenge, as it was no longer better optimized in general. 
+                                    <br><br>
+                                    Because of this, the code is pretty messy and hard to read, as it's in one line. Because of this, I made another version from the ground up that was better made. While it's not in 1 line, it is much cleaner and nicer to read.
+                                </div>
+                            </details>
+
+
+
+
+
+                    </div>
+                </details>
+
+
+            </div>
+
+            
+
+            <div class="achievement-body">
+
+                <details data-keywords="ap computer science principles">
+                    <summary>
+                        AP CSP Performance Task
+                        <span class="ach-icon">&gt;</span>
+                    </summary>
+
+                    <div class="achievement-body">
+
+                        <details data-keywords="ap csp project 1">
+                            <summary>
+                                pt project 1
+                                <span class="ach-icon">&gt;</span>
+                            </summary>
+
+                            <div class="achievement-body">
+                                <h3>What:</h3>
+                                For the AP CSP performance task, I made two projects. The first one being a ceaser cipher encoder and decoder. It has a friendly TUI (text user interface) that allows the user to easily encode and decode messages using the Caesar cipher. 
+                                <br><br>
+
+
+                                <h3>Language/Tools Used:</h3>
+                                Python, time and random libaries, coded in thonny
+                                <br><br>
+
+                                <h3>Visual Demo:</h3>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/5OTSB4N5tRc?si=TTZfOJuIv8U7kEMK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                <a href="https://youtu.be/5OTSB4N5tRc?si=TTZfOJuIv8U7kEMK" target="_blank" style="color: #6af7d4;">(Video Link)</a>
+                                <br><br>
+
+
+                                <h3>What I Learned:</h3>
+                                <ul>
+                                    <li>How the ceaser cipher works</li>
+                                    <li>How to make a friendly TUI</li>
+                                </ul>
+                                <br><br>
+
+                                <h3>Reflection</h3>
+                                I liked this project a lot. It was the first project where I could do anything, not just a specific prompt. I did have some trouble coming up with an idea, however, which is why there are two AP projects instead of one. 
+                                <br><br>
+                                I had more plans for this, like adding an actual UI rather then just text-based UI, adding sounds, recording myself to make it talk to the user, etc. Sadly, I didn't have the time to finish this as I went to make the other project.
+                            </div>
+
+                        </details>
+
+
+
+
+                        <details data-keywords="ap csp project 2">
+                            <summary>
+                                pt project 2
+                                <span class="ach-icon">&gt;</span>
+                            </summary>
+
+                            <div class="achievement-body">
+                                <h3>What:</h3>
+                                For the second project, I made a GUI that shows 3 different numbers and randomizes them every time they show. If the user presses space, it rerolls 1 time. If the user presses the up arrow key, it rerolls 5 times. And if the user won, it showed a you win screen.
+                                <br><br>
+
+
+                                <h3>Language/Tools Used:</h3>
+                                Python, time and random libaries, coded in thonny
+                                <br><br>
+
+                                <h3>Visual Demo:</h3>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/fSfhJ17VCWA?si=joDQCcWr4Vj9K7m-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                <a href="https://youtu.be/fSfhJ17VCWA?si=JCS1lu72yCKty3ex" target="_blank" style="color: #6af7d4;">(Video Link)</a>
+                                <br><br>
+
+
+                                <h3>What I Learned:</h3>
+                                <ul>
+                                    <li>How to listen for keyboard input</li>
+                                    <li>How to make a GUI</li>
+                                </ul>
+                                <br><br>
+
+                                <h3>Reflection</h3>
+                                This project was pretty fun to make and I was able to learn how to make a GUI and listen for keyboard input. I did have some trouble at first with the keyboard inputs, but got it working eventually. Besides that, this project went pretty smoothly, thankfully.                                
+                            </div>
+
+                        </details>
+                    </div>
+
+                </details>
+            </div>
+
+            <div class="achievement-body">
+
+                <details data-keywords="chs web design">
+                    <summary>
+                        CHS web design final project
+                        <span class="ach-icon">&gt;</span>
+                    </summary>
+
+
+                    <div class="achievement-body">
+                        <h3>What:</h3>
+                        This project was ment to be a final project for the CHS web design class. We had to make a website that would show the past projects we did in the class while having a user friendly UI
+                        <br><br>
+
+
+                        <h3>Language/Tools Used:</h3>
+                        HTML, CSS, JavaScript, Python, Pyscript, GitHub Pages
+                        <br><br> 
+
+                        <h3>Visual Demo:</h3>
+                        I wanted to skip the visual Demo for this one since it is a website that you can interact with yourself. Using a video just didn't seem right for this project. So instead, here is the link to the website. 
+
+                        <a href="https://grandwizard69.github.io/final_project_webdesign/" target="_blank" style="color: #6af7d4;">Website link</a>
+                        <br><br>
+
+
+                        <h3>What I Learned:</h3>
+                        <ul>
+                            <li>Expanding upon my knowledge of using python in website development using Pyscript</li>
+                            <li>More about uploading and hosting on GitHub Pages</li>
+                            <li>Expanding more upon my knowledge of web development</li>
+                        </ul>
+                        <br><br>
+
+                        <h3>Reflection</h3>   
+                        This project was a good one as it gave me the opportunity to learn more about and use Python in web development. My original plan was to make a Legend of Zelda-themed website but had to scrap it due to certain constraints with the project. I then decided to take a swing at a TUI (Terminal-Based User Interface), which is what I have now.
+                        <br><br>
+                        The original prompt for this project was to use Dreamweaver and Photoshop to make a website showcasing our past projects. And while I did start on the TUI in Dreamweaver, I ended up coding it in Python, skipping both Dreamweaver and Photoshop entirely. Thankfully, I was able to get permission to continue coding it in Python rather then remaking it in Dreamweaver and Photoshop.
+                        <br><br>
+                        I think it turned out pretty good. However, due to the washhigh.org website possibly going down, I had to switch to hosting it on GitHub Pages. Which, while not causing issues for the website itself, messed up some of the projects it linked to. The computer store, for example, lost some functionality. I assume it is because of GitHub Pages not supporting certain things, but I can't find proof of that or any other cause. Though I didn't really care too much about the cause, as it gave me a new challenge to do.
+                        <br><br>
+                        Either way, I fixed everything, and now it runs smoothly and correctly. Like most of my projects, I enjoyed coding this as it gives me a nice challenge and an opportunity to try something new.
+                        <br><br>
+                        You can still check out my project on <a href="https://washhigh.org" target="_blank" style="color: #6af7d4;">washhigh.org</a> where mine and the other web design students from 2004-2026 are hosted. Though, sadly, it may go down after November 2026, as Washington High School may no longer be doing the CHS Web Design course. And since the website was so that new students could see past projects, the school may choose to no longer pay to host the website.
+                    </div>
+
+
+                </details>
+            </div>
+        </details>
+
+
+
+        <details data-keywords="classes and grades">
+            <summary>
+                Classes and Grades
+                <span class="ach-icon">&gt;</span>
+            </summary>
+
+            <div class="achievement-body">
+                I have been able to consistantly get honors and high honors. As of writing this, my GPA for my second semester for my 2025-2026 (which is the lastest GPA I have at the moment) is a 4.2. My grades did drop during Q2, however, because of problems with my medications. 
+                <br><br>
+                <h3>AP/CHS Classes Taken and Passed:</h3>
+                <ul> 
+                    <li>CHS Programming</li>
+                    <li>AP Computer Science Principles</li>
+                    <li>CHS Web Design</li>
+                </ul>
+                <h3>AP/CHS Classes That I Will Take 2026-2027:</h3>
+                <ul>
+                    <li>AP Literature</li>
+                    <li>CHS Psychology</li>
+                    <li>CHS Sociology</li>
+                    <li>AP Calculus (may change to CHS Calculus if class available)</li>
+                </ul>
+                <h3>Other Computer Science Classes Taken and Passed:</h3>
+                <ul>
+                    <li>Game Programming</li>
+                    <li>Java Programming</li>
+                    <li>Computer Applications</li>
+                </ul>
+            </div>
+        </details>
+
+        <!-- in case i wanna add more 
+        <details>
+            <summary>
+                hi
+                <span class="ach-icon">&gt;</span>
+            </summary>
+
+            <div class="achievement-body">
+                hello
+            </div>
+        </details> -->
+
+    </div>
+</details>
+
+
+
+
+
+
+
+
+
+<!-- PERSONAL ACHIEVEMENTS -->
+<details class="section-details" data-keywords="personal achievements/interests">
+    <summary>
+        <div class="summary-left">
+            <div class="summary-tag">personal_achievements/interests.log</div>
+            <div class="summary-title">Personal Achievements/Interests</div>
+        </div>
+        <div class="summary-icon">&gt;</div>
+    </summary>
+
+    <div class="collapsible-body achievement">
+
+        <details data-keywords="technology">
+            <summary>
+                Technology
+                <span class="ach-icon">&gt;</span>
+            </summary>
+
+            <div class="achievement-body">
+                Like I said in the about me section, I've always been fascinated with technology. I used to take apart and fix things around the house, and I still do. I also have a lot of fun experimenting with new technology and learning how it works.
+                <br><br>
+                One of my favorite things I've done is make a semi-working RC helicopter out of a few broken ones. For context, where I lived, people would throw out many items that would seem like garbage to most, but to me, it was a treasure trove. They would throw out many pieces of old/broken technology that I could take and tinker with to my heart's content. 
+
+                <br><br> 
+                And one of the items that was thrown away was a box of similar broken RC helicopters. I grabbed the box and took it home to take it apart and play around with it. After taking it apart, however, I realized that some only needed a part or so that another one had. Because of this, I had done what I could to take them apart and combine the needed pieces and eventually got it somewhat working. I say somewhat as it would connect with the controller, turn on, and start going up, but the controls never worked well, and the helicopter would always fall and crash after starting to fly. 
+                <br><br>
+                I still like to think of this as an achievement, as I was not only very young and inexperienced but also had severely limited access to tools, causing me to not be able to do much anyway. This is but one of my small victories that I had growing up that made me love technology so much.
+                </div>
+        </details>
+
+        <details data-keywords="sword fighting">
+            <summary>
+                Sword Fighting
+                <span class="ach-icon">&gt;</span>
+            </summary>
+
+            <div class="achievement-body">
+                Like with technology, I've always loved sword fighting. I used to play with a bunch of sticks when I was little and loved doing it. My favorite time was at a Tekko convention where they had 1-on-1 fights and group fighting activities.
+                <br><br>
+                I was dual-wielding swords and fighting against a spear guy. He was the first spear person I had fought, so I was a bit inexperienced at first. I had been able to just barely get a point by dashing towards him and hitting him before he could react. However, he was ready the next match and hit me before I could get close enough, making the score 2:2. And since whoever won this point would win, stakes were high. I had already used my one trick, so this time, I had to predict where he would strike and block while dashing towards him to win. 
+                <br><br>
+                The match had concluded, and the judge was confused because, according to him, he had blinked and the match was done. I still remember dashing towards my opponent while trying to block, and his spear just barely grazing my hair, making it fly to the side, and the wind from his spear literally blowing off the sweat from my face. And yet, my sword had hit his stomach. 
+                <br><br>
+                Me, my enemy, the judge, and everyone else stood frozen at what just happened. We had to get another judge and question some of the crowd, as no one knew what had truly happened. I had told them about his spear grazing my head, as it could've counted as a kill . And finally, after a wait that felt like forever, the judges came to a decision. They said that due to the head strike likely not being enough to kill someone, I had won the match. 
+                <br><br>
+                I remember me and my opponent talking after the fight and us agreeing that, had I not been able to perfectly predict and block his attack, I would've lost more than just the match.
+            </div>
+        </details>
+
+    </div>
+</details>
+
+
+
+
+
+
+
+
+
+<!-- PROJECTS -->
+<details class="section-details" id="projects" data-keywords="projects">
+    <summary>
+        <div class="summary-left">
+            <div class="summary-tag">projects.list</div>
+            <div class="summary-title">Projects</div>
+        </div>
+        <div class="summary-icon">&gt;</div>
+    </summary>
+
+    
+
+
+    <div class="collapsible-body achievement">
+
+        <details data-keywords="unity">
+            <summary>
+                Unity
+                <span class="ach-icon">&gt;</span>
+            </summary>
+
+            <div class="achievement-body">
+                <h3>What:</h3>
+                During my sophomore year, I had some extra time and wanted to find something to do for all of my computer classes. And Unity was one of the things that came to mind. 
+                <br><br>
+                I had checked Unity Hub, and they had a section for courses you could take to learn about how to use Unity. I ended up choosing the 2D adventure game. 
+                <br><br>
+
+
+                <h3>Language/Tools Used:</h3>
+                Unity Editor, C#, VS Code
+                <br><br> 
+
+                <h3>Visual Demo:</h3>
+                As of writing this, I am unable to make a visual Demo for this project. I found the file for it but the Unity version I am using is newer then what I used to make it. I hope to be able to reinstall the older version of Unity and get the project working again so I can make a Demo for it, but for now, I will have to skip it.
+                
+                <br><br>
+
+
+                <h3>What I Learned:</h3>
+                <ul>
+                    <li>How to use Unity</li>
+                    <li>How to program in C#</li>
+                    <li>How to make an interactive 2D game</li>
+                </ul>
+                <br><br>
+
+                <h3>Reflection</h3>  
+                This project was my favorite so far. The Unity course was very in-depth about what the code did and allowed for some wiggle room for the programmer to customize the code. I ended up going off on my own before fully finishing the course and making my own add-ons. For example, I added a sword, a dash, and a beam.
+                <br><br>
+                I had plans to continue the code and take out all the assets used from the tutorial and make my own, but I ended up losing my file. I did find it; however, since it was made in an older Unity version, I couldn't properly load it and continue. Sadly, I don't know exactly what version I had used and am still trying to find the full thing so that I can continue working on it.
+                <br><br>
+                I want to make a full game out of it and have ideas on what I want to do. So I hope I can fix it; otherwise, I will start from scratch.
+            </div>
+        </details>
+
+        <details data-keywords="sage">
+            <summary>
+                Sage
+                <span class="ach-icon">&gt;</span>
+            </summary>
+
+            <div class="achievement-body">
+                <h3>What:</h3>
+                For a while, I had loved the idea of an AI like Jarvis from Iron Man. Also, for a while, I had wanted and wished that I had one. And one day, I realized that now that I know how to code, I can make my own AI assistant like Jarvis. That's where Sage comes from. 
+                <br><br>
+                My first goal was to make an AI assistant that would be utility-based while also having a conversation feature for brainstorming, general conversation, instructions, etc. My second was to make an interface for it and maybe implement it into AR glasses like how E.D.I.T.H. from Iron Man works. 
+                <br><br>
+                Sage while still being a work in progress, is the conversate AI. I started with the Utility-based AI, but got side tracked and ended up making the conversational AI first. Also, because of the fact that it is on version 22 and I am still working on it, I will have a section below for the versions of Sage that I make.
+
+
+                <details data-keywords="sage version 22">
+                    <summary>
+                        Version 22
+                        <span class="ach-icon">&gt;</span>
+                    </summary>
+
+                    <div class="achievement-body">
+                        <h3>Language/Tools Used:</h3>
+                        Python, imports:os, sys, json, re, time, threading, textwrap, path, datetime, groq, rich, pyttsx3, coded in VS Code
+                        <br><br>
+
+                        <h3>Visual Demo:</h3>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/IKKZLBi8hrI?si=pMi6ohuMd2vXvtbs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <a href="https://www.youtube.com/watch?v=IKKZLBi8hrI" target="_blank" style="color: #6af7d4;">(Video Link)</a>
+                        <br><br>
+                        
+                        <h3>What I Learned:</h3>
+                        <ul>
+                            <li>How to implement AI logic in Python</li>
+                            <li>How to create a conversational interface</li>
+                            <li>How to integrate AI functionality into existing applications</li>
+                            <li>How to implement a memory system for the AI</li>
+                        </ul>
+                        <br><br>
+
+                        <h3>Reflection</h3>
+                        After 21 parts, I finally got Sage to a point where it is actually functional. I also Finally got the memory system mostly working. There are still a few kinks to work out, but overall, it is working pretty well. I also have the TTS (text-to-speech) working better and the STT (speech-to-text) is still somewhat working. 
+                        <br><br>
+                        I have been keeping it off so far as it is easier to test and work on it without it, especially since it's still not to good due to the fact that my old system where I started coding it was not good and couldn't run it so I had to do cloud STT, which wasn't to good.
+                        <br><br>
+                        This also took a very long time to make as I had to convert it from Javascript to Python, and I had to rewrite a lot of the code to make it work better and be more efficient. I had it in Javascript as the origignal code was in html because of certain functions being easier to do in an html. However, I found out how to do them in Python and decided to convert it to Python as I am more comfortable with it and it is easier to work with for this project.
+                    </div>
+                </details>
+
+                
+            </div>
+        </details>
+
+        <details data-keywords="hud">
+            <summary>
+                Utility-Based Hud
+                <span class="ach-icon">&gt;</span>
+            </summary>
+
+            <div class="achievement-body">
+                <h3>What:</h3>
+                what started as an AI assistant, is now turning into a utility hud. My original idea on this was to make the hud and later implement it into AR glasses to create a tool like E.D.I.T.H. from Iron Man. <br><br>
+
+
+                <details data-keywords="hud version 1">
+                    <summary>
+                        Version 1
+                        <span class="ach-icon">&gt;</span>
+                    </summary>
+
+                    <div class="achievement-body">
+                        <h3>Language/Tools Used:</h3>
+                        Python, imports:os, sys, math, time, psutil, pynvml, PyQt6, coded in VS Code
+                        <br><br>
+
+                        <h3>Visual Demo:</h3>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/otUnoqTw6wg?si=gg3YC3arsZb5rjSQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <a href="https://youtu.be/otUnoqTw6wg?si=gg3YC3arsZb5rjSQ" target="_blank" style="color: #6af7d4;">(Video Link)</a>
+                        <br><br>
+                        
+                        <h3>What I Learned:</h3>
+                        <ul>
+                            <li>How to create a graphical HUD</li>
+                            <li>More on OOP</li>
+                            <li>How to use the Tuya Developer Platform for controlling lights</li>
+                            <li>how to access system information</li>
+                        </ul>
+                        <br><br>
+
+                        <h3>Reflection</h3>
+                        Currently, this project seems to be going well. As of right now, it is limited in its functions as it is still version 1. I had planned to add more features like showing reminders or notifications, but I haven't gotten to it, as I haven't had as much motivation to continue finishing this. Furthermore, almost all the features I wanted to add have been removed, as I am heavily restricted by the lack of resources like money or system power. <br><br>
+
+
+                        For example,  one of the ways to interact with the HUD that I thought of was using an EMG wristband. However, the cheapest one I could find, being the Mundra Link, is $249-300. And I currently don't have a budget to speak of. On top of this, I don't have the money to buy the AR glasses that I wanted or any other options for them. So while I would love to finish this, it just seems pointless when I know I won't be able to do all the things I have been wanting to do. However, while I am still disappointed, I am still happy about how good the project seems.
+                        </div>
+                </details>
+            </div>
+        </details>
+        
+
+    </div>
+</details>
+
+
+
+
+
+
+
+
+
+<!-- CONTACT -->
+<section id="contact" class="panel">
+    <details data-keywords="contact me" open>
+        <div class="tag">contact.cfg</div>
+        <h2>Contact</h2>
+
+        <p>If you’d like to connect, collaborate, or get any information/code you can reach me here:</p>
+        <p>Email: <span style="color:#6af7d4;">wakeemlwin09@gmail.com</span></p>
+    </details>
+</section>
+
+</div>
+
+<footer>
+    © 2026 wakeem • system status: <span style="color:#6af7d4;">running</span>
+</footer>
+
+
+
+<!--  JS FOR ANIMATION  -->
+<script>
+var shouldAnimate = true; // should be obvious but this is to check if the animation should play
+
+document.querySelectorAll("details").forEach(d => {
+    d.addEventListener("toggle", () => {
+        const body = d.querySelectorAll(":scope > .achievement-body, :scope > .collapsible-body, :scope > .about-body");
+        //console.log(body);
+        if (!body) { return }; //checks if there is a body to animate. if not, it returns and doesn't do anything
+        
+        // Reset animation
+        for (const b of body) {
+            console.log(b);            
+            b.style.opacity = 0; //reset opacity to 0 to make it invisible before animating
+            b.classList.remove("animate-open");
+            void b.offsetWidth;
+
+            if (shouldAnimate){ //only animates if true, if not sets opacity as 1
+                // Animate when opening
+                if (d.open) {
+                    b.classList.add("animate-open");
+                    setTimeout(() => {
+                        b.style.opacity = 1;
+                    }, 100);
+                    
+
+                }
+                
+            } else {
+                b.style.opacity = 1;
+            }
+        }
+        
+        
+    });
+});
+
+
+
+//  KEYWORD SEARCH SYSTEM  -->
+
+
+//declare var for both boxes
+const searchBox = document.getElementById("searchBox");
+
+searchBox.addEventListener("keydown", function(e) {
+    if (e.key !== "Enter") return;  // Only trigger search on Enter key
+    else search();
+});
+
+
+function search() {
+    
+
+    const query = searchBox.value.trim().toLowerCase();
+    if (!query) return;
+
+    // Easter egg: if user searches "hi", replace all text with "hello!"
+    if (query === "hi") {
+        function replaceAllText(node) {
+            if (node.nodeType === Node.TEXT_NODE) {
+                if (node.textContent.trim()) {
+                    node.textContent = "hello!";
+                }
+            } else {
+                for (let child of node.childNodes) {
+                    replaceAllText(child);
+                }
+            }
+        }
+        replaceAllText(document.body);
+        searchBox.blur();
+        suggestionBox.classList.add('hidden');
+        return;
+    }
+
+    const allDetails = document.querySelectorAll("details");
+    let found = false;
+
+    const closeOthers = document.getElementById("closeOthersToggle").checked;
+
+    allDetails.forEach(d => {
+        const keywords = d.dataset.keywords;
+        if (!keywords) return;
+
+        const list = keywords.toLowerCase().split(",").map(k => k.trim());
+
+        if (list.some(keyword => keyword.includes(query))) {
+            found = true;
+            suggestionBox.classList.add('hidden'); //hides suggestion box after searching
+            searchBox.blur(); //remove focus from search box after searching
+
+            shouldAnimate = false; //disable animation for this section to prevent lag cuz lag suk 
+
+            // If toggle is ON → close all other collapsibles
+            if (closeOthers) {
+                allDetails.forEach(x => {
+                    if (x !== d) x.open = false;
+                });
+            }
+
+            // Open this details
+            d.open = true;
+            d.style.opacity = 1; //make sure it's visible even if animation is disabled
+
+            // Open all parent <details> (like Academic/Projects sections)
+            let parent = d.parentElement;
+            while (parent) {
+                if (parent.tagName && parent.tagName.toLowerCase() === "details") {
+                    parent.open = true;
+                }
+                parent = parent.parentElement;
+            }
+
+            // 1. Get the element's position relative to the page
+            const elementPosition = d.getBoundingClientRect().top + window.scrollY;
+
+            // 2. Subtract the header height 
+            const offsetPosition = elementPosition - 90;
+
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+
+            // Scroll to the matched collapsible (old)
+            //d.scrollIntoView({ behavior: "smooth", block: "start" });
+
+            setTimeout(() => { //re-enable animation after a short delay because without delay animation goes back while its scrolling making it lag again, and like i said before, lag suk
+                shouldAnimate = true; //re-enable animation after opening the section
+            }, 100);
+            
+        }
+    });
+
+    if (!found) {
+        alert("No matching section found.");
+    }
+}
+
+// ==========================================================================================================================
+
+// Build suggestion list from all details elements that expose keywords.
+function getSuggestionsFromDataKeywords() {
+    const keywordSet = new Set();
+    document.querySelectorAll('details[data-keywords]').forEach(d => {
+        d.dataset.keywords.split(',').forEach(keyword => {
+            const trimmed = keyword.trim();
+            if (trimmed) keywordSet.add(trimmed);
+        });
+    });
+    return [...keywordSet].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+}
+
+const suggestions = getSuggestionsFromDataKeywords();
+
+// DOM Element References
+const searchInput = document.getElementById('searchBox');
+const suggestionBox = document.getElementById('suggestionBox');
+
+// Fires every single time the user presses a key, deletes a letter, or pastes text
+searchInput.addEventListener('input', () => {
+  // Convert text to lowercase to ensure matching is case-insensitive
+  const query = searchInput.value.toLowerCase();
+  
+  // Wipe out previous suggestions to start with a clean slate
+  suggestionBox.innerHTML = '';
+  
+  // If the input bar is completely empty, hide the dropdown box and exit early
+  if (!query) {
+    suggestionBox.classList.add('hidden');
+    return;
+  }
+
+  // Filter the array to find entries containing the user's typed characters
+  const filtered = suggestions.filter(item => item.toLowerCase().includes(query));
+
+  // If matching items exist, build the suggestion list items dynamically
+  if (filtered.length > 0) {
+    filtered.forEach(item => {
+      // Create a brand new list item <li> element in memory
+      const li = document.createElement('li');
+      li.textContent = item; // Insert the plain text suggestion name
+      
+      // Handle event when a user clicks on a specific suggestion option
+      li.addEventListener('click', () => {
+        searchInput.value = item; // Fill the input field with the clicked item
+        suggestionBox.classList.add('hidden'); // Hide the dropdown menu
+        search(); // Trigger the search function to navigate to the corresponding section
+      });
+      
+      // Inject the newly constructed <li> into our tracking <ul> dropdown container
+      suggestionBox.appendChild(li);
+    });
+    
+    // Reveal the dropdown block since valid suggestions were generated
+    suggestionBox.classList.remove('hidden');
+  } else {
+    // Hide the menu if characters were typed but no array items matched
+    suggestionBox.classList.add('hidden');
+  }
+});
+
+// Event listener attached to the global document object
+// Automatically closes the dropdown menu if a user clicks anywhere outside the search area
+document.addEventListener('click', (e) => {
+  // Check if the clicked target element lives inside the .search-container wrapper
+  if (!e.target.closest('.search-container')) {
+    suggestionBox.classList.add('hidden');
+  }
+});
+</script>
+
+
+
+<!-- SETTINGS BUTTON + PANEL -->
+<script>
+    const settingsBtn = document.getElementById("settingsBtn");
+    const settingsPanel = document.getElementById("settingsPanel");
+
+    settingsBtn.addEventListener("click", () => {
+        settingsPanel.style.display =
+            settingsPanel.style.display === "block" ? "none" : "block";
+    });
+
+    // Close panel if clicking outside
+    document.addEventListener("click", (e) => {
+        if (!settingsContainer.contains(e.target)) {
+            settingsPanel.style.display = "none";
+        }
+    });
+</script>
+
+
+<!-- OPEN/CLOSE ALL BUTTONS -->
+<script>
+// OPEN ALL
+document.getElementById("openAllBtn").addEventListener("click", () => {
+    const allDetails = document.querySelectorAll("details");
+
+    allDetails.forEach(d => {
+        d.open = true;
+    });
+});
+
+// CLOSE ALL
+document.getElementById("closeAllBtn").addEventListener("click", () => {
+    const allDetails = document.querySelectorAll("details");
+
+    allDetails.forEach(d => {
+        d.open = false;
+    });
+});
+</script>
+
+
+<script>
+
+
+</script>
+
+
+</body>
+</html>
